@@ -276,6 +276,7 @@ Remember: You represent a premium AI education brand. Provide exceptional servic
                 'تماس', 'تلگرام', 'شماره', 'شماره تماس', 'شماره تلفن', 'تلفن', 'موبایل', 'موبایل شماره',
                 'ایمیل', 'لینکدین', 'اینستاگرام', 'یوتیوب', 'واتساپ', 'واتس اپ',
                 'چطور تماس', 'چگونه تماس', 'راه تماس', 'راه ارتباط', 'ارتباط', 'رابطه',
+                'شماره تماس چیه', 'شماره تماس چیست', 'شماره تلفن چیه', 'شماره تلفن چیست',
                 # مدرس
                 'متین', 'کفاشیان', 'مدرس', 'استاد', 'رزومه', 'سابقه', 'تجربه', 'پیشینه',
                 # پروژه و کار
@@ -295,7 +296,7 @@ Remember: You represent a premium AI education brand. Provide exceptional servic
                 'چطور تماس بگیرم', 'چگونه تماس بگیرم', 'راه تماس گرفتن', 'راه ارتباط گرفتن'
             ]
         
-        question_lower = question.lower()
+        question_lower = question.lower().strip('؟?')
         
         # Check for direct keyword matches first
         if any(keyword in question_lower for keyword in scope_keywords):
