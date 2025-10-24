@@ -159,17 +159,17 @@ export default function Home() {
     <div className={`min-h-screen flex items-center justify-center p-4 relative z-10 ${language === 'fa' ? 'rtl' : ''}`} dir={language === 'fa' ? 'rtl' : 'ltr'}>
       {/* Main Chat Container */}
       <div className="w-full max-w-4xl mx-auto">
-        {/* Language Selector - Top Left */}
-        <div className="fixed top-4 left-4 md:top-6 md:left-6 z-50 language-selector">
+        {/* Language Selector - Top Right */}
+        <div className="fixed top-4 right-4 md:top-6 md:right-6 z-50 language-selector">
           <div className="relative">
             <button
               onClick={() => setIsLangOpen(!isLangOpen)}
-              className="flex items-center gap-2 md:gap-3 px-4 md:px-6 py-3 md:py-4 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl hover:shadow-3xl hover:bg-white transition-all duration-300 border border-gray-200/50 min-w-[140px] md:min-w-[180px]"
+              className="flex items-center gap-1 md:gap-3 px-2 md:px-6 py-2 md:py-4 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl hover:shadow-3xl hover:bg-white transition-all duration-300 border border-gray-200/50 min-w-[100px] md:min-w-[180px]"
             >
               <span className="text-2xl md:text-3xl">
                 {language === 'en' ? '🇺🇸' : '🇮🇷'}
               </span>
-              <span className="font-bold text-base md:text-lg">
+              <span className="font-bold text-sm md:text-lg">
                 {language === 'en' ? 'English' : 'فارسی'}
               </span>
               <svg 
@@ -183,10 +183,10 @@ export default function Home() {
             </button>
             
             {isLangOpen && (
-              <div className="absolute top-full left-0 mt-3 bg-white/98 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden min-w-[140px] md:min-w-[180px] border border-gray-200/50">
+              <div className="absolute top-full right-0 mt-3 bg-white/98 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden min-w-[100px] md:min-w-[180px] border border-gray-200/50">
                 <button
                   onClick={() => { handleLanguageChange('en'); setIsLangOpen(false) }}
-                  className={`w-full flex items-center gap-3 md:gap-4 px-4 md:px-6 py-3 md:py-4 hover:bg-blue-50 transition-all duration-200 ${language === 'en' ? 'bg-blue-100' : ''}`}
+                  className={`w-full flex items-center gap-2 md:gap-4 px-2 md:px-6 py-2 md:py-4 hover:bg-blue-50 transition-all duration-200 ${language === 'en' ? 'bg-blue-100' : ''}`}
                 >
                   <span className="text-xl md:text-2xl">🇺🇸</span>
                   <span className="font-bold text-base md:text-lg">English</span>
@@ -195,7 +195,7 @@ export default function Home() {
                 <div className="border-t border-gray-200/50"></div>
                 <button
                   onClick={() => { handleLanguageChange('fa'); setIsLangOpen(false) }}
-                  className={`w-full flex items-center gap-3 md:gap-4 px-4 md:px-6 py-3 md:py-4 hover:bg-blue-50 transition-all duration-200 ${language === 'fa' ? 'bg-blue-100' : ''}`}
+                  className={`w-full flex items-center gap-2 md:gap-4 px-2 md:px-6 py-2 md:py-4 hover:bg-blue-50 transition-all duration-200 ${language === 'fa' ? 'bg-blue-100' : ''}`}
                 >
                   <span className="text-xl md:text-2xl">🇮🇷</span>
                   <span className="font-bold text-base md:text-lg">فارسی</span>
@@ -207,8 +207,8 @@ export default function Home() {
         </div>
 
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className={`text-4xl md:text-4xl font-bold text-gray-800 mb-2 ${language === 'fa' ? 'text-4xl md:text-4xl font-black' : ''}`}>
+        <div className="text-center mb-8 pt-16 md:pt-20">
+          <h1 className={`text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-2 px-4 ${language === 'fa' ? 'text-2xl sm:text-3xl md:text-4xl font-black' : ''}`}>
             {language === 'fa' ? 'دستیار هوش مصنوعی متین کفاشیان' : 'Matin Kafashian AI Assistant'}
           </h1>
         </div>
