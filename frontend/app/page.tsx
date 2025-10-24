@@ -161,13 +161,13 @@ export default function Home() {
       {/* Main Chat Container */}
       <div className="w-full max-w-4xl mx-auto">
         {/* Language Selector - Top Right */}
-        <div className="fixed top-4 right-4 md:top-6 md:right-6 z-50 language-selector">
+        <div className="fixed top-2 right-2 sm:top-4 sm:right-4 md:top-6 md:right-6 z-50 language-selector">
           <div className="relative">
             <button
               onClick={() => setIsLangOpen(!isLangOpen)}
-              className="flex items-center gap-1 md:gap-3 px-2 md:px-6 py-2 md:py-4 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl hover:shadow-3xl hover:bg-white transition-all duration-300 border border-gray-200/50 min-w-[100px] md:min-w-[180px]"
+              className="flex items-center gap-1 md:gap-3 px-2 md:px-6 py-1.5 md:py-4 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl hover:shadow-3xl hover:bg-white transition-all duration-300 border border-gray-200/50 min-w-[90px] md:min-w-[180px]"
             >
-              <span className="text-2xl md:text-3xl">
+              <span className="text-lg md:text-3xl">
                 {language === 'en' ? '🇺🇸' : '🇮🇷'}
               </span>
               <span className="font-bold text-sm md:text-lg">
@@ -208,8 +208,8 @@ export default function Home() {
         </div>
 
         {/* Header */}
-        <div className="text-center mb-8 pt-20 md:pt-24">
-          <h1 className={`text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-2 px-4 ${language === 'fa' ? 'text-2xl sm:text-3xl md:text-4xl font-black' : ''}`}>
+        <div className="text-center mb-8 pt-24 sm:pt-28 md:pt-32">
+          <h1 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-2 px-4 ${language === 'fa' ? 'text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black' : ''}`}>
             {language === 'fa' ? 'دستیار هوش مصنوعی متین کفاشیان' : 'Matin Kafashian AI Assistant'}
           </h1>
         </div>
