@@ -252,6 +252,11 @@ Remember: You represent a premium AI education brand. Provide exceptional servic
             'tell me about yourself', 'matin kafashian', 'instructor info',
             'teacher info', 'your profile', 'your details',
             
+            # Projects and Work
+            'projects', 'project', 'portfolio', 'freelance', 'freelancing', 'work', 'job',
+            'earning', 'money', 'income', 'client', 'clients', 'yolo', 'computer vision',
+            'nlp', 'rag', 'saas', 'automation', 'earning', 'earn', 'paid', 'payment',
+            
             # Common question words
             'how much', 'what is', 'tell me', 'explain', 'help', 'learn',
             'teach', 'study', 'start', 'begin', 'join', 'register', 'do you have',
@@ -448,8 +453,16 @@ Remember: You represent a premium AI education brand. Provide exceptional servic
             }
             
         except Exception as e:
+            error_msg = str(e)
+            if "invalid_api_key" in error_msg or "Incorrect API key" in error_msg:
+                response = "I'm currently experiencing an API configuration issue. Please contact the administrator to resolve this."
+            elif "rate_limit" in error_msg.lower():
+                response = "I'm currently experiencing high demand. Please try again in a few moments."
+            else:
+                response = f"I apologize, but I'm experiencing technical difficulties. Please try again later."
+            
             return {
-                'response': f"I apologize, but I'm experiencing technical difficulties. Please try again later. Error: {str(e)}",
+                'response': response,
                 'sources': [],
                 'response_time': time.time() - start_time,
                 'in_scope': True
