@@ -208,7 +208,7 @@ export default function Home() {
 
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className={`text-4xl md:text-4xl font-bold text-gray-800 mb-2 ${language === 'fa' ? 'text-6xl md:text-7xl font-black' : ''}`}>
+          <h1 className={`text-4xl md:text-4xl font-bold text-gray-800 mb-2 ${language === 'fa' ? 'text-4xl md:text-4xl font-black' : ''}`}>
             {language === 'fa' ? 'دستیار هوش مصنوعی متین کفاشیان' : 'Matin Kafashian AI Assistant'}
           </h1>
         </div>
@@ -351,3 +351,4 @@ export default function Home() {
     </div>
   )
 }
+
