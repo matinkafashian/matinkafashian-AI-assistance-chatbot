@@ -75,7 +75,7 @@ DATABASES = {
         'HOST': os.getenv('DB_HOST', 'dpg-d3tn5ojipnbc738dde60-a'),
         'PORT': os.getenv('DB_PORT', '5432'),
         'OPTIONS': {
-            'sslmode': 'require',
+            'sslmode': 'prefer',
         },
     }
 }
