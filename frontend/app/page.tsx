@@ -125,7 +125,8 @@ export default function Home() {
             href={part}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-300 hover:text-blue-200 underline"
+            className="text-blue-300 hover:text-blue-200 underline break-all"
+            style={{ wordBreak: 'break-all' }}
           >
             {part}
           </a>
@@ -227,16 +228,16 @@ export default function Home() {
                 } message-fade-in`}
               >
                 <div
-                  className={`max-w-[80%] rounded-2xl px-4 py-3 ${
+                  className={`max-w-[80%] rounded-2xl px-4 py-3 break-words ${
                     message.type === 'user'
                       ? 'bg-gray-100 text-black'
                       : 'bg-gradient-to-r from-purple-500 to-blue-500 text-white'
                   }`}
-                  style={{ borderRadius: '16px' }}
+                  style={{ borderRadius: '16px', wordWrap: 'break-word', overflowWrap: 'break-word' }}
                 >
                   <div className={`flex items-start justify-between gap-2 ${language === 'fa' ? 'flex-row-reverse' : ''}`}>
                     <div className="flex-1">
-                      <p className={`whitespace-pre-wrap text-base md:text-lg ${language === 'fa' ? 'text-right text-lg md:text-xl font-bold' : 'text-left'}`} dir={language === 'fa' ? 'rtl' : 'ltr'}>
+                      <p className={`whitespace-pre-wrap text-base md:text-lg break-words ${language === 'fa' ? 'text-right text-lg md:text-xl font-bold' : 'text-left'}`} dir={language === 'fa' ? 'rtl' : 'ltr'} style={{ wordWrap: 'break-word', overflowWrap: 'break-word' }}>
                         {message.type === 'assistant' ? extractLinks(message.content) : message.content}
                       </p>
                       
@@ -338,7 +339,7 @@ export default function Home() {
                 <button
                   key={index}
                   onClick={() => setInputMessage(suggestion)}
-                  className={`px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-full transition-colors ${language === 'fa' ? 'text-sm font-bold' : 'text-xs'}`}
+                  className={`px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-full transition-colors text-xs sm:text-sm ${language === 'fa' ? 'font-bold' : ''}`}
                   disabled={isLoading}
                 >
                   {suggestion}
