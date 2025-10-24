@@ -66,18 +66,14 @@ WSGI_APPLICATION = 'chatbot_backend.wsgi.application'
 ASGI_APPLICATION = 'chatbot_backend.asgi.application'
 
 # Database
+import dj_database_url
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME', 'chatbot_db_39rc'),
-        'USER': os.getenv('DB_USER', 'chatbot_user'),
-        'PASSWORD': os.getenv('DB_PASSWORD', ''),
-        'HOST': os.getenv('DB_HOST', 'dpg-d3tn5ojipnbc738dde60-a'),
-        'PORT': os.getenv('DB_PORT', '5432'),
-        'OPTIONS': {
-            'sslmode': 'disable',
-        },
-    }
+    'default': dj_database_url.parse(
+        os.getenv('DATABASE_URL', 'postgresql://chatbot_user:xMzaCHJKEoW6D4G5Buc134y6P00ccd9L@dpg-d3tn5ojipnbc738dde60-a/chatbot_db_39rc'),
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
 }
 
 # Password validation
