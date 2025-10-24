@@ -69,11 +69,14 @@ ASGI_APPLICATION = 'chatbot_backend.asgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME', 'chatbot_db'),
-        'USER': os.getenv('DB_USER', 'postgres'),
+        'NAME': os.getenv('DB_NAME', 'chatbot_db_39rc'),
+        'USER': os.getenv('DB_USER', 'chatbot_user'),
         'PASSWORD': os.getenv('DB_PASSWORD', ''),
-        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'HOST': os.getenv('DB_HOST', 'dpg-d3tn5ojipnbc738dde60-a'),
         'PORT': os.getenv('DB_PORT', '5432'),
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
     }
 }
 
