@@ -68,9 +68,10 @@ ASGI_APPLICATION = 'chatbot_backend.asgi.application'
 # Database
 import dj_database_url
 
+# Use the Internal Database URL from Render PostgreSQL service
 DATABASES = {
     'default': dj_database_url.parse(
-        os.getenv('DATABASE_URL', 'postgresql://chatbot_user:xMzaCHJKEoW6D4G5Buc134y6P00ccd9L@dpg-d3tn5ojipnbc738dde60-a/chatbot_db_39rc'),
+        os.getenv('DATABASE_URL'),
         conn_max_age=600,
         conn_health_checks=True,
     )
