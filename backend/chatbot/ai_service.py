@@ -297,7 +297,7 @@ Remember: You represent a premium AI education brand. Provide exceptional servic
         
         question_lower = question.lower()
         
-        # Check for direct keyword matches
+        # Check for direct keyword matches first
         if any(keyword in question_lower for keyword in scope_keywords):
             return True
             
@@ -318,7 +318,21 @@ Remember: You represent a premium AI education brand. Provide exceptional servic
                 'مشتری', 'کلاینت', 'سفارش', 'درآمد', 'پول', 'آیا', 'چطور', 'چگونه', 'چیه', 'چیست'
             ]
         
-        return any(indicator in question_lower for indicator in course_indicators)
+        # Check course indicators
+        if any(indicator in question_lower for indicator in course_indicators):
+            return True
+            
+        # For Farsi, be more lenient with question patterns
+        if (language or 'en').lower() == 'fa':
+            farsi_question_patterns = [
+                'چیه', 'چیست', 'چطور', 'چگونه', 'چرا', 'کجا', 'کی', 'چه وقت', 'چه زمانی',
+                'آیا', 'آیا می‌توانید', 'آیا می‌شود', 'آیا امکان دارد',
+                'چقدر', 'چند', 'کدام', 'کدام یک', 'کدام‌ها'
+            ]
+            if any(pattern in question_lower for pattern in farsi_question_patterns):
+                return True
+        
+        return False
 
     def _recognize_intent(self, message: str) -> Tuple[str, float]:
         """Recognize user intent with confidence score"""
