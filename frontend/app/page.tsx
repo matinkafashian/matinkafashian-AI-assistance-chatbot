@@ -209,7 +209,7 @@ export default function Home() {
 
         {/* Header */}
         <div className="text-center mb-8 pt-24 sm:pt-28 md:pt-32">
-          <h1 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-2 px-4 ${language === 'fa' ? 'text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black' : ''}`}>
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-2 px-4">
             {language === 'fa' ? 'دستیار هوش مصنوعی متین کفاشیان' : 'Matin Kafashian AI Assistant'}
           </h1>
         </div>
@@ -237,7 +237,7 @@ export default function Home() {
                 >
                   <div className={`flex items-start justify-between gap-2 ${language === 'fa' ? 'flex-row-reverse' : ''}`}>
                     <div className="flex-1">
-                      <p className={`whitespace-pre-wrap text-base md:text-lg break-words ${language === 'fa' ? 'text-right text-lg md:text-xl font-bold' : 'text-left'}`} dir={language === 'fa' ? 'rtl' : 'ltr'} style={{ wordWrap: 'break-word', overflowWrap: 'break-word' }}>
+                      <p className={`whitespace-pre-wrap text-base md:text-lg break-words ${language === 'fa' ? 'text-right' : 'text-left'}`} dir={language === 'fa' ? 'rtl' : 'ltr'} style={{ wordWrap: 'break-word', overflowWrap: 'break-word' }}>
                         {message.type === 'assistant' ? extractLinks(message.content) : message.content}
                       </p>
                       
@@ -339,7 +339,7 @@ export default function Home() {
                 <button
                   key={index}
                   onClick={() => setInputMessage(suggestion)}
-                  className={`px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-full transition-colors text-xs sm:text-sm ${language === 'fa' ? 'font-bold' : ''}`}
+                  className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-full transition-colors text-xs sm:text-sm"
                   disabled={isLoading}
                 >
                   {suggestion}
