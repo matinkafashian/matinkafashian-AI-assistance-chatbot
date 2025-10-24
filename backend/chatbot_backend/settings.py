@@ -146,6 +146,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "https://ai-chatbot-frontend.onrender.com",
+    "https://matinkafashian-ai-chatbot.vercel.app",
+    "https://matinkafashian-ai-chatbot-69dbwutva-milads-projects-995771ec.vercel.app",
     os.getenv('FRONTEND_URL', 'https://ai-chatbot-frontend.onrender.com'),
 ]
 
