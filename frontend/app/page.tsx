@@ -208,7 +208,7 @@ export default function Home() {
         </div>
 
         {/* Header */}
-        <div className="text-center mb-8 pt-16 md:pt-20">
+        <div className="text-center mb-8 pt-20 md:pt-24">
           <h1 className={`text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-2 px-4 ${language === 'fa' ? 'text-2xl sm:text-3xl md:text-4xl font-black' : ''}`}>
             {language === 'fa' ? 'دستیار هوش مصنوعی متین کفاشیان' : 'Matin Kafashian AI Assistant'}
           </h1>
@@ -228,7 +228,7 @@ export default function Home() {
                 } message-fade-in`}
               >
                 <div
-                  className={`max-w-[80%] rounded-2xl px-4 py-3 break-words ${
+                  className={`max-w-[80%] rounded-2xl px-4 py-3 pr-12 break-words relative ${
                     message.type === 'user'
                       ? 'bg-gray-100 text-black'
                       : 'bg-gradient-to-r from-purple-500 to-blue-500 text-white'
@@ -254,7 +254,7 @@ export default function Home() {
                     {message.type === 'assistant' && message.id !== 'welcome' && (
                       <button
                         onClick={() => handleCopyMessage(message.id, message.content)}
-                        className="opacity-60 hover:opacity-100 transition-opacity p-1 rounded"
+                        className="opacity-60 hover:opacity-100 transition-opacity p-1 rounded absolute top-2 right-2"
                         title={language === 'fa' ? 'کپی پیام' : 'Copy message'}
                       >
                         {copiedMessageId === message.id ? (
