@@ -71,14 +71,30 @@ import dj_database_url
 # Debug: Print DATABASE_URL to see what we're getting
 print(f"DATABASE_URL: {os.getenv('DATABASE_URL')}")
 
-# Use the External Database URL from Render PostgreSQL service
-DATABASES = {
-    'default': dj_database_url.parse(
-        os.getenv('DATABASE_URL'),
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
-}
+# Try individual environment variables as fallback
+if os.getenv('DATABASE_URL'):
+    DATABASES = {
+        'default': dj_database_url.parse(
+            os.getenv('DATABASE_URL'),
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
+    }
+else:
+    # Fallback to individual variables
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('DB_NAME', 'chatbot_db_39rc'),
+            'USER': os.getenv('DB_USER', 'chatbot_user'),
+            'PASSWORD': os.getenv('DB_PASSWORD', ''),
+            'HOST': os.getenv('DB_HOST', 'dpg-d3tn5ojipnbc738dde60-a.oregon-postgres.render.com'),
+            'PORT': os.getenv('DB_PORT', '5432'),
+            'OPTIONS': {
+                'sslmode': 'require',
+            },
+        }
+    }
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
