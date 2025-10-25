@@ -161,20 +161,20 @@ export default function Home() {
       {/* Main Chat Container */}
       <div className="w-full max-w-4xl mx-auto">
         {/* Language Selector - Top Right */}
-        <div className="fixed top-2 right-2 sm:top-4 sm:right-4 md:top-6 md:right-6 z-50 language-selector">
+        <div className="fixed top-1 right-1 sm:top-4 sm:right-4 md:top-6 md:right-6 z-50 language-selector">
           <div className="relative">
             <button
               onClick={() => setIsLangOpen(!isLangOpen)}
-              className="flex items-center gap-1 md:gap-3 px-2 md:px-6 py-1.5 md:py-4 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl hover:shadow-3xl hover:bg-white transition-all duration-300 border border-gray-200/50 min-w-[90px] md:min-w-[180px]"
+              className="flex items-center gap-1 md:gap-3 px-1.5 md:px-6 py-1 md:py-4 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl hover:shadow-3xl hover:bg-white transition-all duration-300 border border-gray-200/50 min-w-[80px] md:min-w-[180px]"
             >
-              <span className="text-lg md:text-3xl">
+              <span className="text-sm md:text-3xl">
                 {language === 'en' ? '🇺🇸' : '🇮🇷'}
               </span>
-              <span className="font-bold text-sm md:text-lg">
+              <span className="font-bold text-xs md:text-lg">
                 {language === 'en' ? 'English' : 'فارسی'}
               </span>
               <svg 
-                className={`w-5 h-5 transition-transform duration-200 ${isLangOpen ? 'rotate-180' : ''}`} 
+                className={`w-3 h-3 md:w-5 md:h-5 transition-transform duration-200 ${isLangOpen ? 'rotate-180' : ''}`} 
                 fill="none" 
                 stroke="currentColor" 
                 viewBox="0 0 24 24"
@@ -208,7 +208,7 @@ export default function Home() {
         </div>
 
         {/* Header */}
-        <div className="text-center mb-8 pt-24 sm:pt-28 md:pt-32">
+        <div className="text-center mb-8 pt-20 sm:pt-24 md:pt-28 lg:pt-32">
           <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-2 px-4">
             {language === 'fa' ? 'دستیار هوش مصنوعی متین کفاشیان' : 'Matin Kafashian AI Assistant'}
           </h1>
