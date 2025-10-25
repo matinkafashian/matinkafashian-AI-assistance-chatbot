@@ -156,6 +156,39 @@ Remember: You represent a premium AI education brand. Provide exceptional servic
 
     def _is_question_in_scope(self, question: str, language: str = 'en') -> bool:
         """Check if the question is within the scope of Python/AI/course topics (EN/FA)"""
+        
+        # For Farsi, be much more lenient - almost any reasonable question should be in scope
+        if (language or 'en').lower() == 'fa':
+            # Strip question marks and normalize
+            question_lower = question.lower().strip('؟?').strip()
+            
+            # If it's a very short question (less than 3 characters), might be incomplete
+            if len(question_lower) < 3:
+                return False
+                
+            # For Farsi, be very permissive - any reasonable question should be in scope
+            # Only exclude obvious non-related questions
+            excluded_patterns = [
+                'سلام', 'خداحافظ', 'بای', 'خداحافظی', 'خداحافظی کردن',
+                'چطوری', 'حالت چطوره', 'چطوری', 'حال شما چطوره',
+                'آب و هوا', 'هوا چطوره', 'باران', 'برف', 'گرما', 'سرما',
+                'سیاست', 'سیاسی', 'حکومت', 'دولت', 'انتخابات',
+                'ورزش', 'فوتبال', 'بسکتبال', 'تنیس', 'والیبال',
+                'موسیقی', 'آهنگ', 'خواننده', 'گروه موسیقی',
+                'فیلم', 'سینما', 'بازیگر', 'کارگردان',
+                'غذا', 'رستوران', 'پیتزا', 'برگر', 'ساندویچ',
+                'خرید', 'فروشگاه', 'مغازه', 'بازار', 'قیمت گوشی', 'قیمت ماشین'
+            ]
+            
+            # Check if it contains excluded patterns
+            for pattern in excluded_patterns:
+                if pattern in question_lower:
+                    return False
+            
+            # For Farsi, if it's not explicitly excluded, it's in scope
+            return True
+        
+        # English scope detection (keep existing logic)
         scope_keywords = [
             # Python & Programming
             'python', 'programming', 'code', 'function', 'class', 'variable',
@@ -192,43 +225,10 @@ Remember: You represent a premium AI education brand. Provide exceptional servic
             'teach', 'study', 'start', 'begin', 'join', 'register', 'do you have',
             'can you', 'are you', 'will you', 'can i', 'how can i'
         ]
-
-        if (language or 'en').lower() == 'fa':
-            scope_keywords += [
-                # فارسی: برنامه‌نویسی و AI
-                'پایتون', 'هوش مصنوعی', 'یادگیری ماشین', 'یادگیری عمیق', 'بینایی ماشین', 'nlp',
-                'کدنویسی', 'برنامه نویسی', 'داده', 'شبکه عصبی', 'پردازش زبان طبیعی',
-                'بازیابی اطلاعات', 'رگ', 'rag', 'RAG',
-                # دوره و آموزش
-                'دوره', 'کلاس', 'آموزش', 'ثبت نام', 'برنامه', 'زمانبندی', 'زمان بندی', 'ترم',
-                'شهریه', 'قیمت', 'هزینه', 'پرداخت', 'دلار', 'خصوصی', 'گروهی', 'آنلاین', 'مدت', 'جلسه',
-                # تماس - گسترش یافته
-                'تماس', 'تلگرام', 'شماره', 'شماره تماس', 'شماره تلفن', 'تلفن', 'موبایل', 'موبایل شماره',
-                'ایمیل', 'لینکدین', 'اینستاگرام', 'یوتیوب', 'واتساپ', 'واتس اپ',
-                'چطور تماس', 'چگونه تماس', 'راه تماس', 'راه ارتباط', 'ارتباط', 'رابطه',
-                'شماره تماس چیه', 'شماره تماس چیست', 'شماره تلفن چیه', 'شماره تلفن چیست',
-                # مدرس
-                'متین', 'کفاشیان', 'مدرس', 'استاد', 'رزومه', 'سابقه', 'تجربه', 'پیشینه',
-                # پروژه و کار
-                'پروژه', 'کار', 'شغل', 'فریلنس', 'فریلنسری', 'پروژه خارجی', 'پروژه داخلی',
-                'همکاری', 'همکاری خارجی', 'همکاری داخلی', 'قبول', 'قبول می‌کنید', 'قبول می‌کنم',
-                'ایران', 'خارجی', 'بین‌المللی', 'جهانی', 'کشور', 'کشورهای دیگر',
-                'مشتری', 'مشتریان', 'کلاینت', 'کلاینت‌ها', 'سفارش', 'سفارشات',
-                'درآمد', 'کسب درآمد', 'پول', 'دلار', 'تومان', 'درآمدزایی',
-                # واژه‌های پرسشی رایج - گسترش یافته
-                'چقدر', 'چیست', 'چیه', 'چی', 'چیست', 'توضیح', 'کمک', 'یاد بگیرم', 'شروع', 'ثبت‌نام', 'ثبت نام',
-                'آیا', 'آیا شما', 'آیا می‌توانید', 'آیا می‌شود', 'آیا امکان دارد',
-                'چطور', 'چگونه', 'چرا', 'کجا', 'کی', 'چه وقت', 'چه زمانی',
-                # سوالات تماس
-                'شماره', 'شماره تماس', 'شماره تلفن', 'تلفن', 'موبایل', 'شماره موبایل',
-                'چطور تماس', 'چگونه تماس', 'راه تماس', 'راه ارتباط', 'ارتباط', 'رابطه',
-                'چطور ارتباط', 'چگونه ارتباط', 'راه ارتباطی', 'راه تماس', 'راه تماس گرفتن',
-                'چطور تماس بگیرم', 'چگونه تماس بگیرم', 'راه تماس گرفتن', 'راه ارتباط گرفتن'
-            ]
         
         question_lower = question.lower().strip('؟?')
         
-        # Check for direct keyword matches first
+        # Check for direct keyword matches
         if any(keyword in question_lower for keyword in scope_keywords):
             return True
             
@@ -239,29 +239,10 @@ Remember: You represent a premium AI education brand. Provide exceptional servic
             'private', 'general', 'class', 'training', 'learn', 'teach',
             'contact', 'telegram', 'phone', 'number', 'email', 'social'
         ]
-
-        if (language or 'en').lower() == 'fa':
-            course_indicators += [
-                'قیمت', 'هزینه', 'شهریه', 'چقدر', 'پرداخت', 'ترم', 'خصوصی', 'گروهی', 'کلاس', 'دوره',
-                'ثبت نام', 'ثبت‌نام', 'تلگرام', 'شماره', 'شماره تماس', 'شماره تلفن', 'تلفن', 'موبایل',
-                'ایمیل', 'تماس', 'آموزش', 'یادگیری', 'چطور تماس', 'چگونه تماس', 'راه تماس', 'راه ارتباط',
-                'پروژه', 'کار', 'شغل', 'فریلنس', 'همکاری', 'قبول', 'ایران', 'خارجی', 'بین‌المللی',
-                'مشتری', 'کلاینت', 'سفارش', 'درآمد', 'پول', 'آیا', 'چطور', 'چگونه', 'چیه', 'چیست'
-            ]
         
         # Check course indicators
         if any(indicator in question_lower for indicator in course_indicators):
             return True
-            
-        # For Farsi, be more lenient with question patterns
-        if (language or 'en').lower() == 'fa':
-            farsi_question_patterns = [
-                'چیه', 'چیست', 'چطور', 'چگونه', 'چرا', 'کجا', 'کی', 'چه وقت', 'چه زمانی',
-                'آیا', 'آیا می‌توانید', 'آیا می‌شود', 'آیا امکان دارد',
-                'چقدر', 'چند', 'کدام', 'کدام یک', 'کدام‌ها'
-            ]
-            if any(pattern in question_lower for pattern in farsi_question_patterns):
-                return True
         
         return False
 
