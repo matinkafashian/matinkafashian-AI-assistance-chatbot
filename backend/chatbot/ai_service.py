@@ -280,7 +280,7 @@ Remember: You represent a premium AI education brand. Provide exceptional servic
         
         return enhancements.get(intent, enhancements['general'])
 
-    def generate_response(self, user_message: str, session_id: str = None) -> Dict:
+    def generate_response(self, user_message: str, session_id: str = None, language: str = 'en') -> Dict:
         """Generate AI response with advanced intent recognition and context awareness"""
         start_time = time.time()
         
@@ -316,14 +316,14 @@ Remember: You represent a premium AI education brand. Provide exceptional servic
                 intents = rag_result['intent_analysis']['intents']
             else:
                 # Fallback to basic implementation
-                # Determine language from session for scope and prompts
-                session_language = 'en'
+                # Determine language from parameter or session for scope and prompts
+                session_language = (language or 'en').lower()
                 try:
                     if session_id:
                         sess = ChatSession.objects.get(session_id=session_id)
-                        session_language = (sess.language or 'en').lower()
+                        session_language = (sess.language or language or 'en').lower()
                 except Exception:
-                    session_language = 'en'
+                    session_language = (language or 'en').lower()
 
                 if not self._is_question_in_scope(user_message, session_language):
                     # Determine language from session for out-of-scope reply

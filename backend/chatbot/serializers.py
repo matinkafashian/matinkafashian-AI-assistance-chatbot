@@ -31,6 +31,7 @@ class ChatbotConfigurationSerializer(serializers.ModelSerializer):
 class ChatMessageSerializer(serializers.Serializer):
     message = serializers.CharField(max_length=1000)
     session_id = serializers.CharField(max_length=100, required=False)
+    language = serializers.CharField(max_length=10, required=False, default='en')
     context = serializers.JSONField(required=False)
 
 

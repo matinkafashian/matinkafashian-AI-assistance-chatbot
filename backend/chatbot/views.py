@@ -30,15 +30,20 @@ def send_message(request):
     
     user_message = serializer.validated_data['message']
     session_id = serializer.validated_data.get('session_id')
+    language = serializer.validated_data.get('language', 'en')
     
     # Get or create session
     if session_id:
         try:
             session = ChatSession.objects.get(session_id=session_id)
+            # Update session language if provided
+            if language != 'en':
+                session.language = language
+                session.save()
         except ChatSession.DoesNotExist:
-            session = ChatSession.objects.create(session_id=session_id)
+            session = ChatSession.objects.create(session_id=session_id, language=language)
     else:
-        session = ChatSession.objects.create(session_id=str(uuid.uuid4()))
+        session = ChatSession.objects.create(session_id=str(uuid.uuid4()), language=language)
     
     # Save user message
     user_msg = Message.objects.create(
@@ -49,7 +54,7 @@ def send_message(request):
     
     # Get AI response
     ai_service = AIService()
-    ai_response = ai_service.generate_response(user_message, session.session_id)
+    ai_response = ai_service.generate_response(user_message, session.session_id, language)
     
     # Save AI response
     ai_msg = Message.objects.create(
