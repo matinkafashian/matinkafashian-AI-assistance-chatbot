@@ -157,35 +157,9 @@ Remember: You represent a premium AI education brand. Provide exceptional servic
     def _is_question_in_scope(self, question: str, language: str = 'en') -> bool:
         """Check if the question is within the scope of Python/AI/course topics (EN/FA)"""
         
-        # For Farsi, be much more lenient - almost any reasonable question should be in scope
+        # For Farsi, ALWAYS be in scope - any question should be answered
         if (language or 'en').lower() == 'fa':
-            # Strip question marks and normalize
-            question_lower = question.lower().strip('؟?').strip()
-            
-            # If it's a very short question (less than 3 characters), might be incomplete
-            if len(question_lower) < 3:
-                return False
-                
-            # For Farsi, be very permissive - any reasonable question should be in scope
-            # Only exclude obvious non-related questions
-            excluded_patterns = [
-                'سلام', 'خداحافظ', 'بای', 'خداحافظی', 'خداحافظی کردن',
-                'چطوری', 'حالت چطوره', 'چطوری', 'حال شما چطوره',
-                'آب و هوا', 'هوا چطوره', 'باران', 'برف', 'گرما', 'سرما',
-                'سیاست', 'سیاسی', 'حکومت', 'دولت', 'انتخابات',
-                'ورزش', 'فوتبال', 'بسکتبال', 'تنیس', 'والیبال',
-                'موسیقی', 'آهنگ', 'خواننده', 'گروه موسیقی',
-                'فیلم', 'سینما', 'بازیگر', 'کارگردان',
-                'غذا', 'رستوران', 'پیتزا', 'برگر', 'ساندویچ',
-                'خرید', 'فروشگاه', 'مغازه', 'بازار', 'قیمت گوشی', 'قیمت ماشین'
-            ]
-            
-            # Check if it contains excluded patterns
-            for pattern in excluded_patterns:
-                if pattern in question_lower:
-                    return False
-            
-            # For Farsi, if it's not explicitly excluded, it's in scope
+            # For Farsi, always return True - let the AI handle the response
             return True
         
         # English scope detection (keep existing logic)
